@@ -5,7 +5,7 @@ metadata:
     categories: A list of comma separated categories that your operator falls under.
     certified: 'false'
     containerImage: quay.io/app-sre/deadmanssnitch-operator:latest
-    createdAt: '2019-04-16T16:08:31Z'
+    createdAt: '2019-04-16T16:50:13Z'
     description: Dead Mans Snitch Operator. This operator manages Deadmansnicthes
       for OSD Clusters.
     support: Matt Woodson
@@ -99,5 +99,4 @@ spec:
   maturity: alpha
   provider:
     name: Red Hat, Inc
-  replaces: deadmanssnitch-operator.v
   version: 0.1.18-a2fa247
