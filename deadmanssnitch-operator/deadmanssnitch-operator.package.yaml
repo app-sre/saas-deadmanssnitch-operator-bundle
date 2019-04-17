@@ -1,4 +1,4 @@
 packageName: deadmanssnitch-operator
 channels:
 - name: staging
-  currentCSV: deadmanssnitch-operator.v0.1.22-6332f87
+  currentCSV: deadmanssnitch-operator.v0.1.25-a9fd7f8
