@@ -1,0 +1,128 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    categories: A list of comma separated categories that your operator falls under.
+    certified: 'false'
+    containerImage: quay.io/app-sre/deadmanssnitch-operator:latest
+    createdAt: '2019-04-17T21:13:14Z'
+    description: Dead Mans Snitch Operator. This operator manages Deadmansnicthes
+      for OSD Clusters.
+    support: Matt Woodson
+  name: deadmanssnitch-operator.v0.1.30-db855e4
+  namespace: placeholder
+spec:
+  description: Dead Mans Snitch Operator.
+  displayName: deadmanssnitch-operator
+  install:
+    spec:
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - ''
+          resources:
+          - pods
+          - services
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - '*'
+        - apiGroups:
+          - ''
+          resources:
+          - namespaces
+          verbs:
+          - get
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - '*'
+        - apiGroups:
+          - monitoring.coreos.com
+          resources:
+          - servicemonitors
+          verbs:
+          - get
+          - create
+        - apiGroups:
+          - hive.openshift.io
+          attributeRestrictions: null
+          resources:
+          - clusterdeployments
+          - clusterdeployments/finalizers
+          - clusterdeployments/status
+          - syncsets
+          verbs:
+          - get
+          - list
+          - watch
+          - update
+          - patch
+        - apiGroups:
+          - hive.openshift.io
+          attributeRestrictions: null
+          resources:
+          - syncsets
+          verbs:
+          - create
+          - get
+          - list
+          - update
+          - watch
+        serviceAccountName: deadmanssnitch-operator
+      deployments:
+      - name: deadmanssnitch-operator
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              name: deadmanssnitch-operator
+          template:
+            metadata:
+              labels:
+                name: deadmanssnitch-operator
+            spec:
+              containers:
+              - command:
+                - deadmanssnitch-operator
+                env:
+                - name: WATCH_NAMESPACE
+                  value: ''
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: OPERATOR_NAME
+                  value: deadmanssnitch-operator
+                image: quay.io/app-sre/deadmanssnitch-operator:db855e4
+                imagePullPolicy: Always
+                name: deadmanssnitch-operator
+              serviceAccountName: deadmanssnitch-operator
+    strategy: deployment
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: false
+    type: AllNamespaces
+  keywords:
+  - kubernetes
+  - openshift
+  - multi-cluster
+  - cluster
+  maturity: alpha
+  provider:
+    name: Red Hat, Inc
+  replaces: deadmanssnitch-operator.v0.1.28-8d7001f
+  version: 0.1.30-db855e4
