@@ -1,4 +1,4 @@
 packageName: deadmanssnitch-operator
 channels:
 - name: production
-  currentCSV: deadmanssnitch-operator.v0.1.32-9783534
+  currentCSV: deadmanssnitch-operator.v0.1.34-10e0730
